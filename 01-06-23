@@ -1,0 +1,106 @@
+//Array
+Hash Table
+Prefix Sum//
+link:-https://leetcode.com/problems/subarray-sum-equals-k/
+
+int subarraySum(vector<int>& nums, int k) {
+        int n=nums.size();
+         map<int,int>mp;
+
+         int sum=0;
+         int count=0;
+         for(int i=0;i<n;i++){
+              sum+=nums[i];
+             
+              if(sum==k)
+                 count++;
+                 if(mp.find(sum-k)!=mp.end()){
+                    count+=mp[sum-k];
+                 }
+
+
+
+              //*********************************************************************************************************************************************************************************************//
+
+    link:-  https://codeforces.com/contest/279/problem/B
+topics:-two pointers
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+
+int n,t;
+cin>>n>>t;
+   vector<int>v(n,0);
+   for(int i=0;i<n;i++){
+      int x;
+      cin>>x;
+      v[i]=x;
+   }
+
+    int cost=0;
+    int i=0;
+    int j=0;
+    int count=0;
+    while(i<n&&j<n){
+        cost+=v[j];
+        while(cost>t){
+            cost-=v[i];
+            i++;
+        }
+        count=max(count,j-i+1);
+        
+        j++;
+    }
+   cout<<count<<endl;
+    
+
+}
+
+//****************************************************************************************************************************************************************************************************//
+link:-https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/description/
+topics:-Array,Hash Table,Binary Search,Sliding Window,Prefix Sum
+i prefer with sliding window same concept as just above questn just slightly change it by finding req_sum=totalsum-x;
+
+
+
+ int minOperations(vector<int>& nums, int x) {
+
+        //time:-o(n)
+        //space o(1);
+        int n=nums.size();
+        int total_sum=accumulate(nums.begin(),nums.end(),0);
+        int req_sum=total_sum-x;
+        if(req_sum<0)
+          return -1;
+          if(req_sum==0)
+           return nums.size();
+
+           int sum=0,i=0;
+           int maxi=-1;
+
+           for(int j=0;j<n;j++){
+                
+                sum+=nums[j];
+                while(sum>req_sum){
+                    sum-=nums[i];
+                    i++;
+                }
+
+                if(sum==req_sum)
+                  maxi=max(maxi,j-i+1);
+
+           }
+           if(maxi!=-1) return n-maxi;
+           return -1;
+           
+    }
+};
+
+//**************************************************************************************************************************************************************************************************//
+
+
+
+
