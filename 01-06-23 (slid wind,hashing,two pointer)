@@ -17,6 +17,11 @@ int subarraySum(vector<int>& nums, int k) {
                  if(mp.find(sum-k)!=mp.end()){
                     count+=mp[sum-k];
                  }
+           mp[sum]++;
+}
+return count;
+    }
+     
 
 
 
